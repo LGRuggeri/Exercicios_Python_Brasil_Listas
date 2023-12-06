@@ -42,3 +42,48 @@
 # Valor mínimo pago a 3 colaboradores
 # Maior valor de abono pago: R$ 900.00
 
+import os
+
+frase= 'Projeção de Gastos com Abono'
+salario_func= []
+abono_func= []
+abono_min= 100.0
+salario= True
+cont= 0
+quantidade_abono_min= 0
+
+while salario != 0:
+    salario= int(input(f'Digite o salario do {cont+1} funcionário: '))
+    if salario == 0:
+        break
+    else:
+        salario_func.append(salario)
+    clear= lambda: os.system('cls')
+    abono= salario * 0.2
+    if abono > 100:
+        abono_func.append(abono)
+    else:
+        abono_func.append(abono_min)
+    cont+= 1
+    clear()
+ 
+clear()    
+print(frase)
+print('-' * len(frase))
+for i in range(len(salario_func)):
+    print('Salário:', "R$",salario_func[i])
+    
+print('\n')    
+print('Salário - Abono')
+for i in range(len(salario_func)):
+    print("R$",salario_func[i],' - ',"R$",abono_func[i])
+print('\n')
+
+print(f'Foram processados {len(salario_func)} colaboradores')
+print(f'Total gasto com abonos: R${sum(salario_func)}')
+for i in range(len(abono_func)):
+    if abono_func[i] == 100:
+        quantidade_abono_min+= 1
+print(f'Valor mínimo pago a {quantidade_abono_min} colaboradores')
+print(f'Maior valor de abono pago: R${max(abono_func)}')
+
