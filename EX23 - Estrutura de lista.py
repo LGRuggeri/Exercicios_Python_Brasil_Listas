@@ -34,21 +34,30 @@
 # O cálculo do percentual de uso também deverá ser feito através de uma função, 
 # que será chamada pelo programa principal.
 
-usuarios= []
-espaco_bytes= []
+from Func_EX23 import *
+import os
 
-with open('usuarios.txt','r') as arquivo:
-    arquivo.readline()
-    linha= arquivo.readline()
-    while linha:
-        linha_usuario= {}
-        linha_elementos= linha.strip()
-        try:
-            linha_usuario= (linha_elementos)
-        except:
-            print('Não foi possível')
-        finally:
-            usuarios.append(linha_usuario)
-            linha= arquivo.readline()
-for usuario in usuarios:
-    print(usuario)
+espaco= ' '
+usuarios= ['alexandre','anderson','antonio','carlos','cesar','rosemary']
+espaco_bytes= [456123789,1245698456,123456456,91257581,987458,789456125]
+espaco_megabytes= []
+
+clear= lambda: os.system('cls')
+clear()
+
+for i in range(len(usuarios)):
+    print(usuarios[i],espaco_bytes[i])
+ 
+for i in range(len(espaco_bytes)):   
+    megabyte= byte_megabyte(espaco_bytes[i])
+    espaco_megabytes.append(megabyte)
+
+print('\n')
+print('Nr.',espaco,'Usuário',espaco,'Espaço utilizado','','"%" do uso')
+for i,valor in enumerate(espaco_megabytes):
+    print(i+1,espaco*3,usuarios[i],espaco*5,byte_megabyte(espaco_bytes[i]),'MB'
+           ,espaco*3,percentagem_megabyte(espaco_megabytes[i],espaco_megabytes),'%')
+    
+print('Espaço total ocupado: ', sum(espaco_megabytes),'MB')
+media= round(sum(espaco_megabytes)/len(espaco_megabytes),2)
+print('Espaço médio ocupado: ', media,'MB')
